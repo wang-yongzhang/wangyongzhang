@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wang.app.mapper.AppMapper">
+    <resultMap id="user" type="com.wang.app.model.po.User">
+        <id property="id" column="user_id" />
+        <result property="idType" column="id_type"/>
+        <result property="idNum" column="id_num"/>
+        <result property="userName" column="user_name"/>
+        <result property="address" column="address"/>
+        <result property="loginPhone" column="login_phone"/>
+        <result property="password" column="password"/>
+        <result property="deleted" column="deleted"/>
+        <result property="createDate" column="create_date"/>
+        <result property="pubts" column="pubts"/>
+    </resultMap>
+
+    <select id="getAllUser" resultMap="user">
+        select * from app_user;
+    </select>
+    <select id="getUsers" resultType="com.wang.app.model.po.User">
+        select * from user
+        where deleted = 0
+        <if test="loginPhone != null">
+            and login_phone = #{loginPhone}
+        </if>
+        <if test="password != null">
+            and password = #{password}
+        </if>
+    </select>
+    <insert id="register" parameterType="com.wang.app.model.po.User">
+        insert into app_user(id, id_type, id_num, user_name, address, login_phone, password)
+            VALUE (#{id}, #{idType}, #{idNum}, #{userName}, #{address}, #{loginPhone}, #{password});
+    </insert>
+</mapper>

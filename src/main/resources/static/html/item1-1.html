@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>item1-1</title>
+    <link rel="stylesheet" type="text/css" href="../layui/css/layui.css"/>
+    <script src="../layui/layui.js" type="text/javascript" charset="UTF-8"></script>
+</head>
+<body>
+<p>item1-1</p>
+<table id="demo" lay-filter="test"></table>
+<script>
+    layui.use('table', function () {
+        var table = layui.table;
+
+        //第一个实例
+        table.render({
+            elem: '#demo'
+            , height: 312
+            , url: '/getAllUsers' //数据接口
+            , parseData: function (res) {
+                console.log(res)
+                return {
+                    "code": res.head.code === "000000" ? 0 : 1,
+                    "msg": res.head.message,
+                    "count": res.body != null ? res.body.length : 0,
+                    "data": res.body
+                }
+            }
+            , page: true //开启分页
+            , cols: [[ //表头
+                {field: 'id', title: 'ID', width: 80, sort: true, fixed: 'left'}
+                , {field: 'idType', title: '证件类型', width: 80}
+                , {field: 'idNumber', title: '证件号', width: 80, sort: true}
+                , {field: 'userName', title: '用户名', width: 80}
+                , {field: 'loginPhone', title: '登录手机号', width: 177}
+                , {field: 'loginEmail', title: '登录邮箱', width: 80, sort: true}
+                , {field: 'address', title: '地址', width: 80, sort: true}
+                , {field: 'createTime', title: '创建时间', width: 80}
+                , {field: 'pubts', title: '时间戳', width: 135, sort: true}
+            ]]
+        });
+
+    });
+</script>
+</body>
+</html>

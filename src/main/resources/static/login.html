@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <style>
+        body {
+            background-image: url("img/login.png");
+            background-size: 100%, 100%;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="layui/css/layui.css"/>
+    <script src="layui/layui.js" type="text/javascript" charset="UTF-8"></script>
+</head>
+<body>
+<div style="background-color: whitesmoke">
+    <form class="layui-form" action="/login">
+        <div class="layui-form-item">
+            <label class="layui-form-label">登录账号</label>
+            <div class="layui-input-block">
+                <label>
+                    <input type="text" name="loginPhone" placeholder="请输入登录手机号或邮箱" class="layui-input"/>
+                </label>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">登录密码</label>
+            <div class="layui-input-inline">
+                <label>
+                    <input type="password" name="password" placeholder="请输入密码" class="layui-input">
+                </label>
+            </div>
+            <div class="layui-form-mid layui-word-aux">辅助文字</div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    //Demo
+    layui.use('form', function () {
+        var form = layui.form;
+
+        //监听提交
+        form.on('submit(formDemo)', function (data) {
+            form.submit();
+            return false;
+        });
+    });
+</script>
+</body>
+</html>
